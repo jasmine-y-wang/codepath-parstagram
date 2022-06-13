@@ -1,6 +1,8 @@
-package com.example.parstagram;
+package com.example.parstagram.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.parstagram.DetailActivity;
+import com.example.parstagram.R;
+import com.example.parstagram.models.Post;
 import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 import java.util.Date;
 import java.util.List;
@@ -57,7 +64,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tvUsername;
         private TextView tvDescription;
@@ -66,6 +73,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             ivImage = itemView.findViewById(R.id.ivImage);
@@ -85,6 +93,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             Date createdAt = post.getCreatedAt();
             String timeAgo = Post.calculateTimeAgo(createdAt);
             tvTimestamp.setText(timeAgo);
+        }
+
+        // on click, show DetailActivity for selected post
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Log.i("PostsAdapter", "clicked on post");
+                Post post = posts.get(position);
+                Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
+                context.startActivity(i);
+            }
         }
     }
 }
