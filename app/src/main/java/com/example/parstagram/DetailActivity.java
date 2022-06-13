@@ -1,9 +1,12 @@
 package com.example.parstagram;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +32,8 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        // show back arrow in action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         post = Parcels.unwrap(getIntent().getParcelableExtra(Post.class.getSimpleName()));
         Log.i(TAG, "showing details for post: " + post.getDescription() + ", username: " +
@@ -52,5 +57,16 @@ public class DetailActivity extends AppCompatActivity {
         String timeAgo = Post.calculateTimeAgo(createdAt);
         tvTimestamp.setText(timeAgo);
 
+    }
+
+    // go back to feed after clicking back arrow
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

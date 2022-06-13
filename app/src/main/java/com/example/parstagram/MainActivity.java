@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.parstagram.models.Post;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnFeed;
     public static final String TAG = "MainActivity";
     public static final int  CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 22;
+    private ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         etDescription = findViewById(R.id.etDescription);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnFeed = findViewById(R.id.btnFeed);
+        pbLoading = findViewById(R.id.pbLoading);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pbLoading.setVisibility(ProgressBar.VISIBLE);
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(MainActivity.this, "description can't be empty", Toast.LENGTH_SHORT).show();
@@ -198,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "error while saving :(", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "post save was successful");
+                pbLoading.setVisibility(ProgressBar.INVISIBLE);
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
             }
