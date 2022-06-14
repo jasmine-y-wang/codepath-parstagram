@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivPostImage;
     private Button btnCaptureImage;
     private File photoFile;
-    public String photoFileName;
+    public String photoFileName = "photo.jpg";
     private Button btnFeed;
     public static final String TAG = "MainActivity";
     public static final int  CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 22;

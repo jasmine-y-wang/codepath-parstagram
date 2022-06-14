@@ -18,11 +18,22 @@
         android:theme="@style/Theme.Parstagram"
         tools:targetApi="31">
         <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/SplashTheme"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FeedActivity" />
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".FeedActivity" />
+
         <activity
             android:name=".FeedActivity"
             android:exported="false" />
@@ -32,11 +43,11 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <provider
