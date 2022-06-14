@@ -46,30 +46,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
-
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        final Fragment homeFragment;
+        final Fragment composeFragment = new ComposeFragment();
+        final Fragment feedFragment = new FeedFragment();
+        final Fragment profileFragment = new ProfileFragment();
 
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        Toast.makeText(MainActivity.this, "home!", Toast.LENGTH_SHORT).show();
-                        return true;
+                        fragment = feedFragment;
+                        break;
                     case R.id.action_compose:
-                        Toast.makeText(MainActivity.this, "compose!", Toast.LENGTH_SHORT).show();
-                        return true;
+                        fragment = composeFragment;
+                        break;
                     case R.id.action_profile:
-                        Toast.makeText(MainActivity.this, "profile!", Toast.LENGTH_SHORT).show();
-                        return true;
-                    default: return true;
+                        fragment = profileFragment;
+                        break;
+                    default:
+                        fragment = new ComposeFragment();
+                        break;
                 }
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                return true;
             }
         });
+        // set default selection
+        bottomNavigation.setSelectedItemId(R.id.action_home);
 
     }
 
