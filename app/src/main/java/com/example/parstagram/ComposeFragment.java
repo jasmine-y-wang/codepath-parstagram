@@ -41,14 +41,12 @@ import java.io.IOException;
  */
 public class ComposeFragment extends Fragment {
 
-//    private Button btnLogout;
     private Button btnSubmit;
     private EditText etDescription;
     private ImageView ivPostImage;
     private Button btnCaptureImage;
     private File photoFile;
     public String photoFileName = "photo.jpg";
-//    private Button btnFeed;
     public static final String TAG = "ComposeFragment";
     public static final int  CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 22;
     private ProgressBar pbLoading;
@@ -71,12 +69,11 @@ public class ComposeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        btnLogout = view.findViewById(R.id.btnLogout);
+
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         etDescription = view.findViewById(R.id.etDescription);
         ivPostImage = view.findViewById(R.id.ivPostImage);
-//        btnFeed = view.findViewById(R.id.btnFeed);
         pbLoading = view.findViewById(R.id.pbLoading);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
@@ -104,26 +101,6 @@ public class ComposeFragment extends Fragment {
             }
         });
 
-//        btnFeed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(MainActivity.this, FeedActivity.class);
-//                startActivity(i);
-//            }
-//        });
-
-//        // logout functionality
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ParseUser.logOut();
-//                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
-//                Log.i(TAG, "logout");
-//                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
     }
 
     private void launchCamera() {

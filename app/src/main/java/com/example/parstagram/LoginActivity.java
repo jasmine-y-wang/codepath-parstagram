@@ -81,14 +81,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    // TODO: better error handling
                     Log.e(TAG, "issue with login", e);
                     Toast.makeText(LoginActivity.this, "issue with login!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // navigate to the main activity if the user has signed in properly
                 goMainActivity();
-                Toast.makeText(LoginActivity.this, "success!", Toast.LENGTH_SHORT).show();
             }
         });
     }
