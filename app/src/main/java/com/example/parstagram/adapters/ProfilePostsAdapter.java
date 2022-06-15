@@ -31,7 +31,7 @@ public class ProfilePostsAdapter extends PostsAdapter {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
+        view = LayoutInflater.from(context).inflate(R.layout.item_profile_post, parent, false);
         return new ViewHolder(view);
     }
 
