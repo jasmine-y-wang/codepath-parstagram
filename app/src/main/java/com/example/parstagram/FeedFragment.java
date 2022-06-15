@@ -21,6 +21,7 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class FeedFragment extends Fragment {
     protected List<Post> allPosts;
     public static final String TAG = "FeedActivity";
     private SwipeRefreshLayout swipeContainer;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     public FeedFragment() {
         // Required empty public constructor
@@ -56,9 +58,10 @@ public class FeedFragment extends Fragment {
         // set adapter on the recycler view
         rvPosts.setAdapter(adapter);
         // set layout manager
-        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvPosts.setLayoutManager(linearLayoutManager);
         // query posts
-        queryPosts();
+        queryPosts(null);
 
         // lookup swipe container view and setup refresh listener
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -99,13 +102,25 @@ public class FeedFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        // endless scroll listener
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                queryPosts(allPosts.get(allPosts.size() - 1).getCreatedAt());
+            }
+        };
+        rvPosts.addOnScrollListener(scrollListener);
     }
 
-    protected void queryPosts() {
+    protected void queryPosts(Date startDate) {
         // specify what type of data we want to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.setLimit(20);
+        query.setLimit(5);
+        if (startDate != null) {
+            query.whereLessThan(Post.KEY_CREATED_AT, startDate);
+        }
         // order posts by creation data (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
         // start an asynchronous call for posts
