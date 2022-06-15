@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,11 +18,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.adapters.ProfilePostsAdapter;
 import com.example.parstagram.models.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -36,6 +39,8 @@ public class ProfileFragment extends Fragment {
     public static final String TAG = "FeedActivity";
     private TextView tvUsername;
     private Button btnLogout;
+    private ImageView ivProfilePic;
+    public static final String KEY_PROFILE_PIC = "profilePic";
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,7 +56,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvPosts = view.findViewById(R.id.rvPosts);
         // initialize array that will hold posts and create PostsAdapter
         allPosts = new ArrayList<>();
         adapter = new ProfilePostsAdapter(getContext(), allPosts);
@@ -60,6 +64,15 @@ public class ProfileFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tvProfileUsername);
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
 
+        ivProfilePic = view.findViewById(R.id.ivProfilePic);
+        ParseFile profilePic = ParseUser.getCurrentUser().getParseFile(KEY_PROFILE_PIC);
+        if (profilePic != null) {
+            Glide.with(getContext()).load(profilePic).circleCrop().into(ivProfilePic);
+        } else {
+            Glide.with(getContext()).load(R.drawable.profile_placeholder).circleCrop().into(ivProfilePic);
+        }
+
+        rvPosts = view.findViewById(R.id.rvPosts);
         // set adapter on the recycler view
         rvPosts.setAdapter(adapter);
         // set layout manager

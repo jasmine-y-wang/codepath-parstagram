@@ -140,6 +140,7 @@ public class FeedFragment extends Fragment {
                 // save received posts to list and notify adapter of data
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false); // hide the loading spinner for refresh
             }
         });
 

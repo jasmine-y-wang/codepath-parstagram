@@ -2,6 +2,7 @@ package com.example.parstagram;
 
 import android.app.Application;
 
+import com.example.parstagram.models.Comment;
 import com.example.parstagram.models.Post;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -13,8 +14,9 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // register parse model
+        // register parse models
         ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(Comment.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("hh8msnYLa5wmwyVCkFUKSPjwrEF4oEzLnrBRAm9R")

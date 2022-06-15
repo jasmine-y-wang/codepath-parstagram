@@ -17,6 +17,7 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_AT = "createdAt";
+    public static final String KEY_LIKES = "likes";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -40,6 +41,14 @@ public class Post extends ParseObject {
 
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
+    }
+
+    public Number getLikes() {
+        return getNumber(KEY_LIKES);
+    }
+
+    public void setLikes(Number likes) {
+        put(KEY_LIKES, likes);
     }
 
     public static String calculateTimeAgo(Date createdAt) {

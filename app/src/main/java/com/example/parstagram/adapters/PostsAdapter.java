@@ -85,7 +85,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             ParseFile image = post.getImage();
             if (image != null) {
-                Glide.with(context).load(image.getUrl()).into(ivImage);
+                Glide.with(context).load(image.getUrl())
+                        .placeholder(R.drawable.image_placeholder)
+                        .into(ivImage);
             } else {
                 ivImage.setVisibility(View.GONE);
             }
@@ -103,7 +105,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Log.i("PostsAdapter", "clicked on post");
                 Post post = posts.get(position);
                 Intent i = new Intent(context, DetailActivity.class);
-                i.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
+                i.putExtra(Post.class.getSimpleName(), post);
                 context.startActivity(i);
             }
         }

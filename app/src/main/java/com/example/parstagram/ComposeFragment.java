@@ -197,6 +197,7 @@ public class ComposeFragment extends Fragment {
                 pbLoading.setVisibility(ProgressBar.INVISIBLE);
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+
             }
         });
     }
