@@ -22,10 +22,12 @@ import com.example.parstagram.R;
 import com.example.parstagram.adapters.CommentsAdapter;
 import com.example.parstagram.models.Comment;
 import com.example.parstagram.models.Post;
+import com.example.parstagram.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -108,6 +110,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        // like button functionality
         ibLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +128,15 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        // set profile picture in posts
+        ImageView ivPfp = findViewById(R.id.ivPfp);
+        User poster = (User) ParseUser.getCurrentUser();
+        ParseFile profilePic = poster.getPfp();
+        if (profilePic != null) {
+            Glide.with(this).load(profilePic.getUrl()).circleCrop().into(ivPfp);
+        } else {
+            Glide.with(this).load(R.drawable.profile_placeholder).circleCrop().into(ivPfp);
+        }
     }
 
     private void refreshComments() {
