@@ -6,6 +6,14 @@
     android:layout_height="wrap_content"
     android:paddingBottom="15dp">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
@@ -13,7 +21,7 @@
         android:layout_margin="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:text="jasmine" />
 
     <TextView

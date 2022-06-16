@@ -108,6 +108,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
 
             tvLikes.setText(post.getLikesCount());
+
+            ibLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (post.isLikedByCurrentUser()) {
+                        // unlike
+                        post.unlike();
+                        ibLike.setBackgroundResource(R.drawable.ufi_heart);
+                    } else {
+                        // like
+                        post.like();
+                        ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+
+                    }
+                    tvLikes.setText(post.getLikesCount());
+                }
+            });
         }
 
         // on click, show DetailActivity for selected post

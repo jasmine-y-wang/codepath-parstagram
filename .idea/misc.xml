@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.35122915799500515" />
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.15099995930989585" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.23041687011718753" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13761444091796876" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.31091613769531246" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.33097381591796876" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.2580612182617188" />
@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/item_post.xml" value="0.2756515502929688" />
         <entry key="app/src/main/res/layout/item_profile_post.xml" value="0.12223968505859376" />
         <entry key="app/src/main/res/layout/menu_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.3974746704101561" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3007914225260417" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.43663330078125007" />
       </map>

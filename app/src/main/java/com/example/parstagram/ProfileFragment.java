@@ -33,13 +33,9 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     public static final String TAG = "FeedActivity";
-    private TextView tvUsername;
-    private Button btnLogout;
-    private ImageView ivProfilePic;
     public static final String KEY_PROFILE_PIC = "profilePic";
 
     public ProfileFragment() {
@@ -61,10 +57,10 @@ public class ProfileFragment extends Fragment {
         adapter = new ProfilePostsAdapter(getContext(), allPosts);
 
         // get username
-        tvUsername = view.findViewById(R.id.tvProfileUsername);
+        TextView tvUsername = view.findViewById(R.id.tvProfileUsername);
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
 
-        ivProfilePic = view.findViewById(R.id.ivProfilePic);
+        ImageView ivProfilePic = view.findViewById(R.id.ivProfilePic);
         ParseFile profilePic = ParseUser.getCurrentUser().getParseFile(KEY_PROFILE_PIC);
         if (profilePic != null) {
             Glide.with(getContext()).load(profilePic).circleCrop().into(ivProfilePic);
@@ -72,7 +68,7 @@ public class ProfileFragment extends Fragment {
             Glide.with(getContext()).load(R.drawable.profile_placeholder).circleCrop().into(ivProfilePic);
         }
 
-        rvPosts = view.findViewById(R.id.rvPosts);
+        RecyclerView rvPosts = view.findViewById(R.id.rvPosts);
         // set adapter on the recycler view
         rvPosts.setAdapter(adapter);
         // set layout manager
@@ -81,7 +77,7 @@ public class ProfileFragment extends Fragment {
         queryPosts();
 
 
-        btnLogout = view.findViewById(R.id.btnLogout);
+        Button btnLogout = view.findViewById(R.id.btnLogout);
         // logout functionality
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,9 +3,11 @@ package com.example.parstagram.models;
 import android.util.Log;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 import org.parceler.Parcel;
@@ -110,22 +112,37 @@ public class Post extends ParseObject {
 
     public void unlike() {
         List<ParseUser> likedBy = getLikedBy();
-        for (int i = 0; i < likedBy.size(); i++) {
+        for (int i = likedBy.size() - 1; i >= 0; i--) {
             if (ParseUser.getCurrentUser().hasSameId(likedBy.get(i))) {
                 likedBy.remove(i);
-                break;
             }
         }
         setLikedBy(likedBy);
-        Log.i("post", "unliked");
-        saveInBackground();
+        saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e("post", "unlike failed to register", e);
+                } else {
+                    Log.i("post", "unliked");
+                }
+            }
+        });
     }
 
     public void like() {
         List<ParseUser> likedBy = getLikedBy();
         likedBy.add(ParseUser.getCurrentUser());
         setLikedBy(likedBy);
-        Log.i("post", "liked");
-        saveInBackground();
+        saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e("post", "like failed to register", e);
+                } else {
+                    Log.i("post", "liked");
+                }
+            }
+        });
     }
 }
