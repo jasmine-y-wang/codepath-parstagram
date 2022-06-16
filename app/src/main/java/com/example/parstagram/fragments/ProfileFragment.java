@@ -1,4 +1,4 @@
-package com.example.parstagram;
+package com.example.parstagram.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.parstagram.R;
+import com.example.parstagram.activities.LoginActivity;
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.adapters.ProfilePostsAdapter;
 import com.example.parstagram.models.Post;
+import com.example.parstagram.models.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -61,9 +63,10 @@ public class ProfileFragment extends Fragment {
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
 
         ImageView ivProfilePic = view.findViewById(R.id.ivProfilePic);
-        ParseFile profilePic = ParseUser.getCurrentUser().getParseFile(KEY_PROFILE_PIC);
+        User currentUser = (User) ParseUser.getCurrentUser();
+        ParseFile profilePic = currentUser.getPfp();
         if (profilePic != null) {
-            Glide.with(getContext()).load(profilePic).circleCrop().into(ivProfilePic);
+            Glide.with(getContext()).load(profilePic.getUrl()).circleCrop().into(ivProfilePic);
         } else {
             Glide.with(getContext()).load(R.drawable.profile_placeholder).circleCrop().into(ivProfilePic);
         }
@@ -76,19 +79,18 @@ public class ProfileFragment extends Fragment {
         // query posts
         queryPosts();
 
-
         Button btnLogout = view.findViewById(R.id.btnLogout);
         // logout functionality
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseUser.logOut();
-                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
                 Log.i(TAG, "logout");
                 Intent i = new Intent(getContext(), LoginActivity.class);
                 startActivity(i);
             }
         });
+
     }
 
     protected void queryPosts() {

@@ -14,12 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.parstagram.DetailActivity;
+import com.example.parstagram.activities.DetailActivity;
 import com.example.parstagram.R;
 import com.example.parstagram.models.Post;
+import com.example.parstagram.models.User;
 import com.parse.ParseFile;
-
-import org.parceler.Parcels;
+import com.parse.ParseUser;
 
 import java.util.Date;
 import java.util.List;
@@ -73,6 +73,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvTimestamp;
         private ImageButton ibLike;
         private TextView tvLikes;
+        private ImageView ivPfp;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,11 +84,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
             ibLike = itemView.findViewById(R.id.ibLike);
             tvLikes = itemView.findViewById(R.id.tvLikes);
+            ivPfp = itemView.findViewById(R.id.ivPfp);
         }
 
         public void bind(Post post) {
+            User poster = (User) post.getUser();
             tvDescription.setText(post.getDescription());
-            tvUsername.setText(post.getUser().getUsername());
+            tvUsername.setText(poster.getUsername());
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(image.getUrl())
@@ -100,6 +103,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             Date createdAt = post.getCreatedAt();
             String timeAgo = Post.calculateTimeAgo(createdAt);
             tvTimestamp.setText(timeAgo);
+
+            // set profile picture in posts
+            ParseFile profilePic = poster.getPfp();
+            if (profilePic != null) {
+                Glide.with(context).load(profilePic.getUrl()).circleCrop().into(ivPfp);
+            } else {
+                Glide.with(context).load(R.drawable.profile_placeholder).circleCrop().into(ivPfp);
+            }
+
 
             if (post.isLikedByCurrentUser()) {
                 ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
@@ -120,7 +132,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         // like
                         post.like();
                         ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
-
                     }
                     tvLikes.setText(post.getLikesCount());
                 }

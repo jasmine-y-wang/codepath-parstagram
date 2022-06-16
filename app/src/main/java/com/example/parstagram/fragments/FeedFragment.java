@@ -1,4 +1,4 @@
-package com.example.parstagram;
+package com.example.parstagram.fragments;
 
 import android.os.Bundle;
 
@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.parstagram.EndlessRecyclerViewScrollListener;
+import com.example.parstagram.R;
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.models.Post;
 import com.parse.FindCallback;

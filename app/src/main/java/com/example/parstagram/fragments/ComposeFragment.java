@@ -1,4 +1,4 @@
-package com.example.parstagram;
+package com.example.parstagram.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.parstagram.R;
 import com.example.parstagram.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseFile;
