@@ -34,7 +34,7 @@ public class FeedFragment extends Fragment {
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
-    public static final String TAG = "FeedActivity";
+    public static final String TAG = "FeedFragment";
     private SwipeRefreshLayout swipeContainer;
     private EndlessRecyclerViewScrollListener scrollListener;
 

@@ -37,8 +37,7 @@ public class ProfileFragment extends Fragment {
 
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
-    public static final String TAG = "FeedActivity";
-    public static final String KEY_PROFILE_PIC = "profilePic";
+    public static final String TAG = "ProfileFragment";
 
     public ProfileFragment() {
         // Required empty public constructor
