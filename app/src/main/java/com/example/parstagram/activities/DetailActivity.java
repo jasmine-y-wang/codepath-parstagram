@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.parstagram.CommentActivity;
 import com.example.parstagram.R;
 import com.example.parstagram.adapters.CommentsAdapter;
 import com.example.parstagram.models.Comment;
