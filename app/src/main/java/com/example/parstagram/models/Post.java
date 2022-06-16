@@ -110,13 +110,20 @@ public class Post extends ParseObject {
 
     public void unlike() {
         List<ParseUser> likedBy = getLikedBy();
-        int indexToRemove = -1;
         for (int i = 0; i < likedBy.size(); i++) {
             if (ParseUser.getCurrentUser().hasSameId(likedBy.get(i))) {
-                indexToRemove = i;
+                likedBy.remove(i);
                 break;
             }
         }
-        likedBy.remove(indexToRemove);
+        setLikedBy(likedBy);
+        saveInBackground();
+    }
+
+    public void like() {
+        List<ParseUser> likedBy = getLikedBy();
+        likedBy.add(ParseUser.getCurrentUser());
+        setLikedBy(likedBy);
+        saveInBackground();
     }
 }

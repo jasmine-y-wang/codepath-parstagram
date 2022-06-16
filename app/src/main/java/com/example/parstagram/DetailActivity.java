@@ -105,19 +105,16 @@ public class DetailActivity extends AppCompatActivity {
         ibLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<ParseUser> likedBy = post.getLikedBy();
                 if (post.isLikedByCurrentUser()) {
                     // unlike
                     post.unlike();
-
                     ibLike.setBackground(getDrawable(R.drawable.ufi_heart));
                 } else {
                     // like
-                    likedBy.add(ParseUser.getCurrentUser());
+                    post.like();
                     ibLike.setBackground(getDrawable(R.drawable.ufi_heart_active));
+
                 }
-                post.setLikedBy(likedBy);
-                post.saveInBackground();
                 tvLikes.setText(post.getLikesCount());
             }
         });
