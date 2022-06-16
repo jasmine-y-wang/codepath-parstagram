@@ -117,6 +117,7 @@ public class Post extends ParseObject {
             }
         }
         setLikedBy(likedBy);
+        Log.i("post", "unliked");
         saveInBackground();
     }
 
@@ -124,6 +125,7 @@ public class Post extends ParseObject {
         List<ParseUser> likedBy = getLikedBy();
         likedBy.add(ParseUser.getCurrentUser());
         setLikedBy(likedBy);
+        Log.i("post", "liked");
         saveInBackground();
     }
 }

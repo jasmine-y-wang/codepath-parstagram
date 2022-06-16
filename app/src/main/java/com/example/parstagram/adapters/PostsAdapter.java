@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,6 +71,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvDescription;
         private ImageView ivImage;
         private TextView tvTimestamp;
+        private ImageButton ibLike;
+        private TextView tvLikes;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +81,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription = itemView.findViewById(R.id.tvDescription);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
+            ibLike = itemView.findViewById(R.id.ibLike);
+            tvLikes = itemView.findViewById(R.id.tvLikes);
         }
 
         public void bind(Post post) {
@@ -95,6 +100,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             Date createdAt = post.getCreatedAt();
             String timeAgo = Post.calculateTimeAgo(createdAt);
             tvTimestamp.setText(timeAgo);
+
+            if (post.isLikedByCurrentUser()) {
+                ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+            } else {
+                ibLike.setBackgroundResource(R.drawable.ufi_heart);
+            }
+
+            tvLikes.setText(post.getLikesCount());
         }
 
         // on click, show DetailActivity for selected post

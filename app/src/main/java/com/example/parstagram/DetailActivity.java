@@ -45,8 +45,8 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         post = getIntent().getParcelableExtra(Post.class.getSimpleName());
-        Log.i(TAG, "showing details for post: " + post.getDescription() + ", username: " +
-                post.getUser().getUsername());
+//        Log.i(TAG, "showing details for post: " + post.getDescription() + ", username: " +
+//                post.getUser().getUsername());
 
         TextView tvUsername = findViewById(R.id.tvUsername);
         TextView tvDescription = findViewById(R.id.tvDescription);
@@ -67,8 +67,6 @@ public class DetailActivity extends AppCompatActivity {
 
         // show like count
         tvLikes.setText(post.getLikesCount());
-        Log.i("likedby", post.getLikedBy().toString() + " user: " + ParseUser.getCurrentUser().getUsername());
-
 
         if (post.isLikedByCurrentUser()) {
             ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
@@ -76,7 +74,11 @@ public class DetailActivity extends AppCompatActivity {
             ibLike.setBackgroundResource(R.drawable.ufi_heart);
         }
 
-        tvUsername.setText(post.getUser().getUsername());
+        try {
+            tvUsername.setText(post.getUser().fetchIfNeeded().getUsername());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         tvDescription.setText(post.getDescription());
         ParseFile image = post.getImage();
         if (image != null) {

@@ -194,10 +194,10 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "error while saving :(", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "post save was successful");
+                Toast.makeText(getContext(), "posted successfully!", Toast.LENGTH_SHORT).show();
                 pbLoading.setVisibility(ProgressBar.INVISIBLE);
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
-
             }
         });
     }

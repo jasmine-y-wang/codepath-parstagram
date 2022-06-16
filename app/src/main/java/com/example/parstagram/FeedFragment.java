@@ -60,8 +60,6 @@ public class FeedFragment extends Fragment {
         // set layout manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts.setLayoutManager(linearLayoutManager);
-        // query posts
-        queryPosts(null);
 
         // lookup swipe container view and setup refresh listener
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
@@ -146,5 +144,12 @@ public class FeedFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("FeedFragment", "onResume");
+        queryPosts(null);
     }
 }
