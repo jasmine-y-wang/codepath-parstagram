@@ -108,14 +108,8 @@ public class DetailActivity extends AppCompatActivity {
                 List<ParseUser> likedBy = post.getLikedBy();
                 if (post.isLikedByCurrentUser()) {
                     // unlike
-                    int indexToRemove = -1;
-                    for (int i = 0; i < likedBy.size(); i++) {
-                        if (ParseUser.getCurrentUser().hasSameId(likedBy.get(i))) {
-                            indexToRemove = i;
-                            break;
-                        }
-                    }
-                    likedBy.remove(indexToRemove);
+                    post.unlike();
+
                     ibLike.setBackground(getDrawable(R.drawable.ufi_heart));
                 } else {
                     // like

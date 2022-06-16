@@ -116,4 +116,16 @@ public class Post extends ParseObject {
         }
         return false;
     }
+
+    public void unlike() {
+        List<ParseUser> likedBy = getLikedBy();
+        int indexToRemove = -1;
+        for (int i = 0; i < likedBy.size(); i++) {
+            if (ParseUser.getCurrentUser().hasSameId(likedBy.get(i))) {
+                indexToRemove = i;
+                break;
+            }
+        }
+        likedBy.remove(indexToRemove);
+    }
 }
