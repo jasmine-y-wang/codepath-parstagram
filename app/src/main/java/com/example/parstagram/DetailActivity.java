@@ -22,6 +22,8 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,6 +65,17 @@ public class DetailActivity extends AppCompatActivity {
         // load comments for post
         refreshComments();
 
+        // show like count
+        tvLikes.setText(post.getLikesCount());
+        Log.i("likedby", post.getLikedBy().toString() + " user: " + ParseUser.getCurrentUser().getUsername());
+
+
+        if (post.isLikedByCurrentUser()) {
+            ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+        } else {
+            ibLike.setBackgroundResource(R.drawable.ufi_heart);
+        }
+
         tvUsername.setText(post.getUser().getUsername());
         tvDescription.setText(post.getDescription());
         ParseFile image = post.getImage();
@@ -86,6 +99,32 @@ public class DetailActivity extends AppCompatActivity {
                 Intent i = new Intent(DetailActivity.this, CommentActivity.class);
                 i.putExtra("post", post);
                 startActivity(i);
+            }
+        });
+
+        ibLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<ParseUser> likedBy = post.getLikedBy();
+                if (post.isLikedByCurrentUser()) {
+                    // unlike
+                    int indexToRemove = -1;
+                    for (int i = 0; i < likedBy.size(); i++) {
+                        if (ParseUser.getCurrentUser().hasSameId(likedBy.get(i))) {
+                            indexToRemove = i;
+                            break;
+                        }
+                    }
+                    likedBy.remove(indexToRemove);
+                    ibLike.setBackground(getDrawable(R.drawable.ufi_heart));
+                } else {
+                    // like
+                    likedBy.add(ParseUser.getCurrentUser());
+                    ibLike.setBackground(getDrawable(R.drawable.ufi_heart_active));
+                }
+                post.setLikedBy(likedBy);
+                post.saveInBackground();
+                tvLikes.setText(post.getLikesCount());
             }
         });
 

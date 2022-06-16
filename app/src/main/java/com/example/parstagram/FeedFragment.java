@@ -74,6 +74,7 @@ public class FeedFragment extends Fragment {
                 // specify what type of data we want to query
                 ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
                 query.include(Post.KEY_USER);
+                query.include(Post.KEY_LIKED_BY);
                 query.setLimit(20);
                 // order posts by creation data (newest first)
                 query.addDescendingOrder("createdAt");
@@ -117,6 +118,7 @@ public class FeedFragment extends Fragment {
         // specify what type of data we want to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.include(Post.KEY_LIKED_BY);
         query.setLimit(5);
         if (startDate != null) {
             query.whereLessThan(Post.KEY_CREATED_AT, startDate);

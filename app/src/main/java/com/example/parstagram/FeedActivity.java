@@ -88,6 +88,7 @@ public class FeedActivity extends AppCompatActivity {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
+        query.include(Post.KEY_LIKED_BY);
         // order posts by creation data (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
