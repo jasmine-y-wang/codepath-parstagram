@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.parstagram.activities.DetailActivity;
 import com.example.parstagram.R;
+import com.example.parstagram.activities.MainActivity;
 import com.example.parstagram.models.Post;
 import com.example.parstagram.models.User;
 import com.parse.ParseFile;
@@ -134,6 +135,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
                     }
                     tvLikes.setText(post.getLikesCount());
+                }
+            });
+
+            ivPfp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i("PostAdapter", "go to profile frag");
+                    ((MainActivity) context).goToProfileFrag(post.getUser());
                 }
             });
         }

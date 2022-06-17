@@ -92,7 +92,6 @@ public class ComposeFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.showProgressBar();
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "description can't be empty", Toast.LENGTH_SHORT).show();
@@ -102,6 +101,7 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "there is no image :(", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                mainActivity.showProgressBar();
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
             }

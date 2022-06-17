@@ -38,9 +38,14 @@ public class ProfileFragment extends Fragment {
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     public static final String TAG = "ProfileFragment";
+    public User user;
 
     public ProfileFragment() {
         // Required empty public constructor
+    }
+
+    public ProfileFragment(ParseUser user) {
+        this.user = (User) user;
     }
 
     @Override
@@ -59,11 +64,10 @@ public class ProfileFragment extends Fragment {
 
         // get username
         TextView tvUsername = view.findViewById(R.id.tvProfileUsername);
-        tvUsername.setText(ParseUser.getCurrentUser().getUsername());
+        tvUsername.setText(user.getUsername());
 
         ImageView ivProfilePic = view.findViewById(R.id.ivProfilePic);
-        User currentUser = (User) ParseUser.getCurrentUser();
-        ParseFile profilePic = currentUser.getPfp();
+        ParseFile profilePic = user.getPfp();
         if (profilePic != null) {
             Glide.with(getContext()).load(profilePic.getUrl()).circleCrop().into(ivProfilePic);
         } else {
@@ -79,24 +83,28 @@ public class ProfileFragment extends Fragment {
         queryPosts();
 
         Button btnLogout = view.findViewById(R.id.btnLogout);
-        // logout functionality
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser.logOut();
-                Log.i(TAG, "logout");
-                Intent i = new Intent(getContext(), LoginActivity.class);
-                startActivity(i);
-            }
-        });
-
+        if (user.hasSameId(ParseUser.getCurrentUser())) {
+            // only allow logout if on current user's profile
+            // logout functionality
+            btnLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ParseUser.logOut();
+                    Log.i(TAG, "logout");
+                    Intent i = new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }
+            });
+        } else {
+            btnLogout.setText("Follow");
+        }
     }
 
     protected void queryPosts() {
         // specify what type of data we want to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
+        query.whereEqualTo(Post.KEY_USER, user);
         query.setLimit(20);
         // order posts by creation data (newest first)
         query.addDescendingOrder(Post.KEY_CREATED_AT);
