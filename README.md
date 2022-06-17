@@ -2,7 +2,7 @@
 
 **Parstagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **25** hours spent in total
 
 ## User Stories
 
@@ -25,26 +25,26 @@ The following **stretch** features are implemented:
 - [x] User can load more posts once he or she reaches the bottom of the feed using endless scrolling.
 - [x] User should switch between different tabs using fragments and a Bottom Navigation View.
     - [x] Feed Tab (to view all posts from all users)
-    - [ ] Capture Tab (to make a new post using the Camera and Photo Gallery)
+    - [x] Capture Tab (to make a new post using the Camera and Photo Gallery)
     - [x] Profile Tab (to view only the current user's posts, in a grid)
 - [x] Show the username and creation time for each post
 - User Profiles:
     - [ ] Allow the logged in user to add a profile photo
     - [x] Display the profile photo with each post
-    - [ ] Tapping on a post's username or profile photo goes to that user's profile page
+    - [x] Tapping on a post's username or profile photo goes to that user's profile page
     - [x] User Profile shows posts in a grid
-- [ ] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse
+- [x] After the user submits a new post, show an indeterminate progress bar while the post is being uploaded to Parse
 - [x] User can comment on a post and see all comments for each post in the post details screen.
 - [x] User can like a post and see number of likes for each post in the post details screen.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Heart turns red after liking
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Show who liked certain posts (liked by X and others)
+2. Allow users to add bios and edit their profile
 
 ## Video Walkthrough
 
@@ -63,7 +63,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Sometimes changes in the Parse database would not be reflected unless I switched emulators
 
 ## License
 
