@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.example.parstagram.fragments.ComposeFragment;
 import com.example.parstagram.fragments.FeedFragment;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;
     public static final String TAG = "MainActivity";
+    public ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
+        pbLoading = findViewById(R.id.pbLoading);
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        final Fragment composeFragment = new ComposeFragment();
+        final Fragment composeFragment = new ComposeFragment(MainActivity.this);
         final Fragment feedFragment = new FeedFragment();
         final Fragment profileFragment = new ProfileFragment();
 
@@ -57,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
         // set default selection
         bottomNavigation.setSelectedItemId(R.id.action_home);
 
+    }
+
+    public void goToFeedFrag() {
+        hideProgressBar();
+        bottomNavigation.setSelectedItemId(R.id.action_home);
+    }
+
+    public void showProgressBar() {
+        pbLoading.setVisibility(ProgressBar.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        pbLoading.setVisibility(ProgressBar.INVISIBLE);
     }
 
 

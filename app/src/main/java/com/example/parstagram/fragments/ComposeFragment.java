@@ -2,6 +2,7 @@ package com.example.parstagram.fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.parstagram.R;
+import com.example.parstagram.activities.MainActivity;
 import com.example.parstagram.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -50,10 +52,14 @@ public class ComposeFragment extends Fragment {
     public String photoFileName = "photo.jpg";
     public static final String TAG = "ComposeFragment";
     public static final int  CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 22;
-    private ProgressBar pbLoading;
+    private MainActivity mainActivity;
 
     public ComposeFragment() {
         // Required empty public constructor
+    }
+
+    public ComposeFragment(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
@@ -75,7 +81,6 @@ public class ComposeFragment extends Fragment {
         btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
         etDescription = view.findViewById(R.id.etDescription);
         ivPostImage = view.findViewById(R.id.ivPostImage);
-        pbLoading = view.findViewById(R.id.pbLoading);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +92,7 @@ public class ComposeFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pbLoading.setVisibility(ProgressBar.VISIBLE);
+                mainActivity.showProgressBar();
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "description can't be empty", Toast.LENGTH_SHORT).show();
@@ -195,10 +200,9 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "error while saving :(", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "post save was successful");
-                Toast.makeText(getContext(), "posted successfully!", Toast.LENGTH_SHORT).show();
-                pbLoading.setVisibility(ProgressBar.INVISIBLE);
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+                mainActivity.goToFeedFrag();
             }
         });
     }

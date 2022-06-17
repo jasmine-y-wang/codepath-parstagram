@@ -30,6 +30,7 @@ public class CommentActivity extends AppCompatActivity {
         Toast.makeText(this, post.getDescription(), Toast.LENGTH_SHORT).show();
         EditText etComment = findViewById(R.id.etComment);
         Button btnPost = findViewById(R.id.btnPost);
+        Button btnCancel = findViewById(R.id.btnCancel);
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,13 @@ public class CommentActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
