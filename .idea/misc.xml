@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bg_login_gradient.xml" value="0.108" />
         <entry key="app/src/main/res/drawable/compose_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/home_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_ufi_heart_active.xml" value="0.1" />
@@ -15,11 +16,12 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.35122915799500515" />
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.15099995930989585" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25002136230468747" />
+        <entry key="app/src/main/res/layout/activity_login_fancy.xml" value="0.26080795509227805" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2873168945312499" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.2981430053710938" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.2580612182617188" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.34325092957083103" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18304127380911225" />
         <entry key="app/src/main/res/layout/item_comment.xml" value="0.2578933715820313" />
         <entry key="app/src/main/res/layout/item_post.xml" value="0.2756515502929688" />
         <entry key="app/src/main/res/layout/item_profile_post.xml" value="0.12223968505859376" />
