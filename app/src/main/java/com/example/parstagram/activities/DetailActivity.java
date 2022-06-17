@@ -128,7 +128,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // set profile picture in posts
         ImageView ivPfp = findViewById(R.id.ivPfp);
-        User poster = (User) ParseUser.getCurrentUser();
+        User poster = (User) post.getUser();
         ParseFile profilePic = poster.getPfp();
         if (profilePic != null) {
             Glide.with(this).load(profilePic.getUrl()).circleCrop().into(ivPfp);
