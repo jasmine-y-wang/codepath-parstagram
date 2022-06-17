@@ -74,7 +74,7 @@ public class DetailActivity extends AppCompatActivity {
         tvLikes.setText(post.getLikesCount());
 
         if (post.isLikedByCurrentUser()) {
-            ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+            ibLike.setBackgroundResource(R.drawable.ic_ufi_heart_active);
         } else {
             ibLike.setBackgroundResource(R.drawable.ufi_heart);
         }
@@ -120,8 +120,7 @@ public class DetailActivity extends AppCompatActivity {
                 } else {
                     // like
                     post.like();
-                    ibLike.setBackground(getDrawable(R.drawable.ufi_heart_active));
-
+                    ibLike.setBackground(getDrawable(R.drawable.ic_ufi_heart_active));
                 }
                 tvLikes.setText(post.getLikesCount());
             }

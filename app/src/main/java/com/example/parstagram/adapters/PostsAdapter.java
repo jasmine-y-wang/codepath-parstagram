@@ -115,7 +115,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
 
             if (post.isLikedByCurrentUser()) {
-                ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+                ibLike.setBackgroundResource(R.drawable.ic_ufi_heart_active);
             } else {
                 ibLike.setBackgroundResource(R.drawable.ufi_heart);
             }
@@ -132,7 +132,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     } else {
                         // like
                         post.like();
-                        ibLike.setBackgroundResource(R.drawable.ufi_heart_active);
+                        ibLike.setBackgroundResource(R.drawable.ic_ufi_heart_active);
                     }
                     tvLikes.setText(post.getLikesCount());
                 }
