@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="insta_blue">#405DE6</color>
+    <color name="insta_blue_dark">#1C3CD9</color>
+    <color name="insta_purple_blue">#5851DB</color>
+    <color name="insta_purple_blue_dark">#3C34D5</color>
+    <color name="insta_purple">#833AB4</color>
+    <color name="insta_purple_red">#C13584</color>
+    <color name="insta_rose">#E1306C</color>
+    <color name="insta_red">#FD1D1D</color>
+    <color name="insta_red_orange">#F56040</color>
+    <color name="insta_orange">#F77737</color>
+    <color name="insta_orange_yellow">#FCAF45</color>
+    <color name="insta_yellow">#FFDC80</color>
+
 </resources>
